@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperion Game Engine & RPG Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --bg-card: #151c2e;
+            --bg-card-hover: #1e2942;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glow: 0 0 20px rgba(59, 130, 246, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Header Bar */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            background: linear-gradient(90deg, #111827 0%, #1f2937 100%);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: var(--glow);
+        }
+
+        .logo-title h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #fff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-title p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .header-badges {
+            display: flex;
+            gap: 12px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+
+        /* App Container Layout */
+        .app-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Main Viewport Area */
+        .viewport-section {
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            gap: 16px;
+            background-color: #0d1322;
+        }
+
+        .canvas-card {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        .canvas-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: none;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: #070a13;
+        }
+
+        /* Sidebar Control Panel */
+        .sidebar {
+            background: var(--bg-card);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 16px;
+            gap: 16px;
+        }
+
+        .panel-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .panel-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-val {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            width: 60%;
+            transition: width 0.3s ease;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .inv-slot {
+            aspect-ratio: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .inv-slot:hover {
+            border-color: var(--accent-blue);
+            transform: scale(1.05);
+        }
+
+        /* Console Log */
+        .console-log {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: #050811;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            height: 120px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .log-entry {
+            color: var(--text-muted);
+        }
+
+        .log-success { color: var(--accent-green); }
+        .log-info { color: var(--accent-cyan); }
+        .log-warn { color: var(--accent-amber); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-group">
+            <div class="logo-icon">H</div>
+            <div class="logo-title">
+                <h1>Hyperion Game Engine</h1>
+                <p>2D/3D Modular Architecture & RPG Framework</p>
+            </div>
+        </div>
+        <div class="header-badges">
+            <div class="badge"><span class="badge-dot"></span> LOC: 79,111</div>
+            <div class="badge">FPS: <span id="fps-counter" style="color:var(--accent-cyan)">60</span></div>
+            <div class="badge">Git: main</div>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Main Viewport -->
+        <div class="viewport-section">
+            <div class="canvas-card">
+                <div class="canvas-toolbar">
+                    <div style="font-weight:600; font-size:0.9rem;">WebGL 2D/3D Engine Canvas</div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn" id="btn-regen">Regenerate Dungeon</button>
+                        <button class="btn btn-secondary" id="btn-spawn">Spawn Enemy</button>
+                        <button class="btn btn-secondary" id="btn-sfx">Play SFX Synth</button>
+                    </div>
+                </div>
+                <canvas id="game-canvas"></canvas>
+            </div>
+
+            <!-- Console Log -->
+            <div class="console-log" id="console-output">
+                <div class="log-entry log-info">[ENGINE] Hyperion WebGL Engine v1.0 Initialized.</div>
+                <div class="log-entry log-success">[SYSTEM] Loaded 79,111 Lines of Code across 45 Subsystem Modules.</div>
+                <div class="log-entry log-info">[WORLD] Procedural BSP Dungeon Level Generation active.</div>
+            </div>
+        </div>
+
+        <!-- Sidebar Inspector -->
+        <div class="sidebar">
+            <!-- Player Stats -->
+            <div class="panel-card">
+                <div class="panel-title">
+                    <span>Player Character</span>
+                    <span style="font-size:0.75rem; color:var(--accent-green);">LVL <span id="player-lvl">2</span></span>
+                </div>
+                <div class="stat-row">
+                    <span>Health (HP):</span>
+                    <span class="stat-val" id="hp-val">100 / 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%; background: linear-gradient(90deg, var(--accent-red), var(--accent-amber));"></div>
+                </div>
+                <div class="stat-row">
+                    <span>Mana (MP):</span>
+                    <span class="stat-val" id="mp-val">50 / 50</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));"></div>
+                </div>
+                <div class="stat-row">
+                    <span>Strength / Agility:</span>
+                    <span class="stat-val">18 / 14</span>
+                </div>
+            </div>
+
+            <!-- Physics & Engine Inspector -->
+            <div class="panel-card">
+                <div class="panel-title">Engine Real-Time Stats</div>
+                <div class="stat-row">
+                    <span>ECS Entities:</span>
+                    <span class="stat-val" id="entity-count">14 Active</span>
+                </div>
+                <div class="stat-row">
+                    <span>Physics Rigidbodies:</span>
+                    <span class="stat-val">6 Rigidbodies</span>
+                </div>
+                <div class="stat-row">
+                    <span>A* Path Nodes:</span>
+                    <span class="stat-val">400 Grid Nodes</span>
+                </div>
+                <div class="stat-row">
+                    <span>Draw Calls:</span>
+                    <span class="stat-val">12 Calls/Frame</span>
+                </div>
+            </div>
+
+            <!-- Inventory Grid -->
+            <div class="panel-card">
+                <div class="panel-title">Equipment & Inventory</div>
+                <div class="inventory-grid">
+                    <div class="inv-slot" title="Hyperion Mythic Sword">⚔️</div>
+                    <div class="inv-slot" title="Dragon Aegis Shield">🛡️</div>
+                    <div class="inv-slot" title="Health Elixir">🧪</div>
+                    <div class="inv-slot" title="Mana Crystal">💎</div>
+                    <div class="inv-slot" title="Ancient Ring">💍</div>
+                    <div class="inv-slot" title="Rune Stone">📜</div>
+                    <div class="inv-slot"></div>
+                    <div class="inv-slot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
