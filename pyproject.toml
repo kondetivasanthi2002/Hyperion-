@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hyperion-game-engine"
+version = "1.0.0"
+description = "A 50k+ LOC modular Game Engine & RPG Application"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
