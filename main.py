@@ -30,7 +30,7 @@ def main():
     
     print(f"[OK] ECS World Initialized: {world}")
     print(f"[OK] Physics World Initialized: {physics}")
-    print(f"[OK] Player Stats Initialized: HP={player_stats.health}, MP={player_stats.mana}")
+    print(f"[OK] Player Stats Initialized: HP={player_stats.current_hp}, MP={player_stats.current_mp}")
     print(f"[OK] Camera2D Initialized: Pos={camera.position}")
     print(f"[OK] Pathfinding Grid Initialized: {pathfinder.width}x{pathfinder.height}")
     print(f"[OK] Procedural Dungeon Generator: {len(rooms)} Rooms Carved")
