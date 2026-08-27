@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hyperion - Neon Pink Cyber RPG Engine</title>
+    <title>Hyperion - Cyber-Pink RPG Game & Engine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0d0517;
-            --bg-card: #170a28;
-            --bg-card-hover: #24113e;
+            --bg-dark: #090312;
+            --bg-card: #150926;
+            --bg-card-hover: #220e3a;
             --accent-pink: #ff2a85;
-            --accent-pink-glow: rgba(255, 42, 133, 0.4);
             --accent-magenta: #ec4899;
             --accent-purple: #a855f7;
-            --accent-rose: #f43f5e;
             --accent-gold: #fbbf24;
-            --accent-cyan: #22d3ee;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
             --text-main: #fff0f6;
             --text-muted: #d8b4fe;
-            --border-color: rgba(255, 42, 133, 0.25);
+            --border-color: rgba(255, 42, 133, 0.28);
             --glow: 0 0 25px rgba(255, 42, 133, 0.45);
         }
 
@@ -47,55 +46,54 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 24px;
-            background: linear-gradient(90deg, #130622 0%, #250b40 50%, #1a082e 100%);
+            padding: 10px 24px;
+            background: linear-gradient(90deg, #10041c 0%, #240a3e 50%, #160628 100%);
             border-bottom: 2px solid var(--accent-pink);
-            box-shadow: 0 4px 20px rgba(255, 42, 133, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 42, 133, 0.35);
         }
 
         .logo-group {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
         .logo-icon {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 1.4rem;
             box-shadow: var(--glow);
-            text-shadow: 0 0 10px rgba(255,255,255,0.8);
         }
 
         .logo-title h1 {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 800;
             letter-spacing: 1px;
-            background: linear-gradient(90deg, #ffffff, #ff75b5, #f472b6);
+            background: linear-gradient(90deg, #ffffff, #ff75b5, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
         }
 
         .logo-title p {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            font-weight: 400;
         }
 
         .header-badges {
             display: flex;
-            gap: 12px;
+            gap: 10px;
+            align-items: center;
         }
 
         .badge {
-            background: rgba(255, 42, 133, 0.1);
+            background: rgba(255, 42, 133, 0.12);
             border: 1px solid var(--border-color);
             padding: 6px 14px;
             border-radius: 20px;
@@ -104,15 +102,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 0 10px rgba(255, 42, 133, 0.15);
         }
 
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--accent-pink);
-            box-shadow: 0 0 10px var(--accent-pink);
+        .badge-gold {
+            color: var(--accent-gold);
+            border-color: rgba(251, 191, 36, 0.4);
+            background: rgba(251, 191, 36, 0.1);
         }
 
         /* Layout Container */
@@ -127,16 +122,16 @@
         .viewport-section {
             display: flex;
             flex-direction: column;
-            padding: 16px;
-            gap: 16px;
-            background-color: #08020f;
+            padding: 14px;
+            gap: 12px;
+            background-color: #07020d;
         }
 
         .canvas-card {
             flex: 1;
             background: var(--bg-card);
             border: 2px solid var(--border-color);
-            border-radius: 16px;
+            border-radius: 14px;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -148,71 +143,70 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 18px;
-            background: rgba(15, 5, 29, 0.85);
+            padding: 10px 16px;
+            background: rgba(13, 4, 25, 0.9);
             border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
         }
 
-        .controls-hint {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
+        .skills-bar {
             display: flex;
-            gap: 10px;
-            align-items: center;
+            gap: 8px;
         }
 
-        .key-cap {
-            background: rgba(255, 42, 133, 0.2);
+        .skill-btn {
+            background: rgba(255, 42, 133, 0.15);
             border: 1px solid var(--accent-pink);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #fff;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
             font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .skill-btn:hover {
+            background: var(--accent-pink);
+            box-shadow: 0 0 12px var(--accent-pink);
+            transform: translateY(-2px);
         }
 
         .btn {
             background: linear-gradient(135deg, #ff2a85, #d946ef);
             color: white;
             border: none;
-            padding: 9px 18px;
+            padding: 8px 16px;
             border-radius: 8px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(255, 42, 133, 0.4);
+            gap: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(255, 42, 133, 0.4);
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 42, 133, 0.6);
-            background: linear-gradient(135deg, #ff4093, #e879f9);
+            box-shadow: 0 6px 18px rgba(255, 42, 133, 0.6);
         }
 
-        .btn-secondary {
-            background: rgba(255, 42, 133, 0.12);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            box-shadow: none;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 42, 133, 0.25);
-            box-shadow: 0 0 12px rgba(255, 42, 133, 0.3);
+        .btn-gold {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: #000;
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
         }
 
         canvas {
             width: 100%;
             height: 100%;
             display: block;
-            background: #090312;
+            background: #080310;
         }
 
         /* Sidebar Control Panel */
@@ -222,32 +216,25 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            padding: 16px;
-            gap: 16px;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.5);
+            padding: 14px;
+            gap: 12px;
         }
 
         .panel-card {
-            background: rgba(255, 42, 133, 0.05);
+            background: rgba(255, 42, 133, 0.04);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 10px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            transition: all 0.2s ease;
-        }
-
-        .panel-card:hover {
-            border-color: var(--accent-pink);
-            box-shadow: 0 0 15px rgba(255, 42, 133, 0.2);
+            gap: 10px;
         }
 
         .panel-title {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             color: var(--accent-pink);
             display: flex;
             align-items: center;
@@ -257,19 +244,16 @@
         .stat-row {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-family: 'JetBrains Mono', monospace;
         }
 
-        .stat-val {
-            font-weight: 700;
-            color: #fff;
-        }
+        .stat-val { font-weight: 700; color: #fff; }
 
         .progress-bar {
-            height: 10px;
+            height: 8px;
             background: rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
+            border-radius: 4px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -279,21 +263,21 @@
             background: linear-gradient(90deg, #ff2a85, #ec4899);
             width: 100%;
             transition: width 0.3s ease;
-            box-shadow: 0 0 10px var(--accent-pink);
+            box-shadow: 0 0 8px var(--accent-pink);
         }
 
         /* Equipment Grid */
         .equipment-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
         }
 
         .eq-slot {
             background: rgba(0, 0, 0, 0.4);
             border: 1.5px dashed var(--accent-pink);
             border-radius: 8px;
-            padding: 10px;
+            padding: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -301,7 +285,7 @@
             gap: 4px;
             cursor: pointer;
             transition: all 0.2s;
-            min-height: 65px;
+            min-height: 60px;
         }
 
         .eq-slot:hover {
@@ -313,19 +297,11 @@
         .eq-slot.active {
             border-style: solid;
             background: rgba(255, 42, 133, 0.25);
-            box-shadow: 0 0 15px rgba(255, 42, 133, 0.5);
+            box-shadow: 0 0 12px rgba(255, 42, 133, 0.5);
         }
 
-        .eq-icon {
-            font-size: 1.4rem;
-        }
-
-        .eq-label {
-            font-size: 0.68rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+        .eq-icon { font-size: 1.3rem; }
+        .eq-label { font-size: 0.65rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
 
         /* Inventory Grid */
         .inventory-grid {
@@ -345,64 +321,54 @@
             font-size: 1.3rem;
             cursor: pointer;
             transition: all 0.2s;
-            position: relative;
         }
 
         .inv-slot:hover {
             border-color: var(--accent-pink);
             transform: scale(1.08);
             box-shadow: 0 0 12px rgba(255, 42, 133, 0.5);
-            background: rgba(255, 42, 133, 0.2);
         }
 
-        .inv-slot.empty {
-            opacity: 0.4;
-            cursor: default;
-        }
-
-        .inv-slot.empty:hover {
-            transform: none;
-            box-shadow: none;
-        }
+        .inv-slot.empty { opacity: 0.3; cursor: default; }
 
         /* Console Output Log */
         .console-log {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.78rem;
-            background: #06020c;
+            font-size: 0.75rem;
+            background: #05010a;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px;
-            height: 120px;
+            border-radius: 8px;
+            padding: 10px;
+            height: 110px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 4px;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
         }
 
         .log-entry { color: var(--text-muted); }
         .log-success { color: #4ade80; }
         .log-info { color: #38bdf8; }
         .log-pink { color: #ff2a85; font-weight: 700; }
-        .log-warn { color: #fbbf24; }
+        .log-gold { color: #fbbf24; font-weight: 700; }
+        .log-warn { color: #f87171; }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header Bar -->
     <header>
         <div class="logo-group">
             <div class="logo-icon">🌸</div>
             <div class="logo-title">
-                <h1>Hyperion Cyber-Pink</h1>
-                <p>2D/3D Game Engine & Cyber RPG Framework</p>
+                <h1>Hyperion RPG Game</h1>
+                <p>Action RPG Cyber Engine & Wave Combat</p>
             </div>
         </div>
         <div class="header-badges">
-            <div class="badge"><span class="badge-dot"></span> 79,111 LOC</div>
+            <div class="badge badge-gold">💰 Coins: <span id="coin-val">120</span></div>
+            <div class="badge">🌊 Wave: <span id="wave-val" style="color:var(--accent-pink); font-weight:700;">1</span></div>
             <div class="badge">FPS: <span id="fps-counter" style="color:var(--accent-pink); font-weight:700;">60</span></div>
-            <div class="badge">Theme: Cyber Pink</div>
         </div>
     </header>
 
@@ -411,32 +377,30 @@
         <div class="viewport-section">
             <div class="canvas-card">
                 <div class="canvas-toolbar">
-                    <div class="controls-hint">
-                        <span>Controls:</span>
-                        <span class="key-cap">W</span><span class="key-cap">A</span><span class="key-cap">S</span><span class="key-cap">D</span> Move |
-                        <span class="key-cap">SPACE</span> Attack
+                    <div class="skills-bar">
+                        <button class="skill-btn" id="skill-1">⚡ Nova (1)</button>
+                        <button class="skill-btn" id="skill-2">💨 Dash (2)</button>
+                        <button class="skill-btn" id="skill-3">💖 Heal (3)</button>
                     </div>
                     <div style="display:flex; gap:8px;">
-                        <button class="btn" id="btn-attack">⚔️ Attack (Space)</button>
-                        <button class="btn btn-secondary" id="btn-regen">🌀 New Dungeon</button>
-                        <button class="btn btn-secondary" id="btn-spawn">👾 Spawn Enemy</button>
-                        <button class="btn btn-secondary" id="btn-loot">🎁 Drop Loot</button>
+                        <button class="btn btn-gold" id="btn-shop">🛒 Merchant Shop</button>
+                        <button class="btn" id="btn-next-wave">⚔️ Next Wave</button>
+                        <button class="btn btn-secondary" id="btn-audio">🎵 BGM Music</button>
                     </div>
                 </div>
                 <canvas id="game-canvas"></canvas>
             </div>
 
-            <!-- Console Log -->
+            <!-- Console Output Log -->
             <div class="console-log" id="console-output">
-                <div class="log-entry log-pink">[ENGINE] Cyber-Pink Hyperion Engine Active.</div>
-                <div class="log-entry log-success">[SYSTEM] Loaded 79,111 Lines of Code across 45 Subsystem Modules.</div>
-                <div class="log-entry log-info">[INPUT] Keyboard WASD controls & Spacebar Attack bound. Click items to Equip!</div>
+                <div class="log-entry log-pink">[GAME] Hyperion Cyber RPG Engine Active. Use WASD to move & SPACE to attack!</div>
+                <div class="log-entry log-info">[OBJECTIVE] Defeat enemy waves, collect coins, and equip mythic pink artifacts!</div>
             </div>
         </div>
 
         <!-- Sidebar Inspector -->
         <div class="sidebar">
-            <!-- Player Stats Panel -->
+            <!-- Hero Stats Panel -->
             <div class="panel-card">
                 <div class="panel-title">
                     <span>Cyber Hero Stats</span>
@@ -468,7 +432,7 @@
 
             <!-- Equipment Slots -->
             <div class="panel-card">
-                <div class="panel-title">Active Equipment (Click to Unequip)</div>
+                <div class="panel-title">Equipped Gear (Click to Unequip)</div>
                 <div class="equipment-grid">
                     <div class="eq-slot" id="eq-weapon" data-slot="Weapon">
                         <div class="eq-icon">⚔️</div>
@@ -487,26 +451,19 @@
 
             <!-- Inventory Grid -->
             <div class="panel-card">
-                <div class="panel-title">Inventory Bag (Click to Equip/Use)</div>
-                <div class="inventory-grid" id="inventory-container">
-                    <!-- Dynamic inventory slots generated by app.js -->
-                </div>
+                <div class="panel-title">Inventory Bag (Click Item)</div>
+                <div class="inventory-grid" id="inventory-container"></div>
             </div>
 
-            <!-- Engine Real-Time Stats -->
+            <!-- Minimap & Engine Stats -->
             <div class="panel-card">
-                <div class="panel-title">Real-Time Subsystems</div>
-                <div class="stat-row">
-                    <span>Active ECS Entities:</span>
-                    <span class="stat-val" id="entity-count">8 Entities</span>
+                <div class="panel-title">Radar Minimap & Subsystems</div>
+                <div style="display:flex; justify-content:center;">
+                    <canvas id="minimap-canvas" width="140" height="90" style="border:1px solid var(--accent-pink); border-radius:6px; background:#040108;"></canvas>
                 </div>
-                <div class="stat-row">
-                    <span>Physics Rigidbodies:</span>
-                    <span class="stat-val" id="body-count">4 Bodies</span>
-                </div>
-                <div class="stat-row">
-                    <span>A* Path Nodes:</span>
-                    <span class="stat-val">400 Grid Nodes</span>
+                <div class="stat-row" style="margin-top:6px;">
+                    <span>Enemies Remaining:</span>
+                    <span class="stat-val" id="enemy-count" style="color:var(--accent-pink);">2 Alive</span>
                 </div>
             </div>
         </div>
