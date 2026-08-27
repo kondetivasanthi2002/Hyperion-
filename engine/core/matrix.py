@@ -28,10 +28,7 @@ class Matrix4x4:
     def __repr__(self) -> str:
         rows = [self.m[i:i+4] for i in range(0, 16, 4)]
         row_strs = [", ".join(f"{x:8.4f}" for x in row) for row in rows]
-        return "Matrix4x4([
-  " + "
-  ".join(row_strs) + "
-])"
+        return "Matrix4x4(" + str(row_strs) + ")"
 
     @staticmethod
     def identity() -> 'Matrix4x4':
